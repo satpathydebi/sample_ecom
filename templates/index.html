@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-commerce Portal</title>
+</head>
+<body>
+    <h1>Products</h1>
+    <ul>
+        {% for product in products %}
+            <li><a href="{{ url_for('product', id=product.id) }}">{{ product.name }}</a> - ${{ product.price }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
