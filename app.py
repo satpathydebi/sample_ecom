@@ -12,6 +12,7 @@ app.secret_key = 'your_secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ecommerce.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+image_url = db.Column(db.String(200))
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -22,8 +23,20 @@ class Product(db.Model):
 
 # Sample data
 sample_data = [
-    {"name": "Headphones", "description": "Sony Headphones", "price": 10.99, "category": "Electronics"},
-    #{"name": "Product 2", "description": "Description for Product 2", "price": 19.99, "category": "Clothing"},
+    {
+        "name": "Headphones",
+        "description": "Sony Headphones",
+        "price": 10.99,
+        "category": "Electronics",
+        "image_url": "https://media.istockphoto.com/id/1389603578/photo/laptop-blank-screen-on-wood-table-with-blurred-coffee-shop-cafe-interior-background-and.jpg?s=1024x1024&w=is&k=20&c=p7ApF_YFB25U09t6h37Fg8RnWPkQ_eT0zMUASAR0wcU="  # Add an image URL
+    },
+    {
+        "name": "Laptop",
+        "description": "Dell",
+        "price": 199.99,
+        "category": "Computer",
+        "image_url": "https://media.istockphoto.com/id/1389603578/photo/laptop-blank-screen-on-wood-table-with-blurred-coffee-shop-cafe-interior-background-and.jpg?s=1024x1024&w=is&k=20&c=p7ApF_YFB25U09t6h37Fg8RnWPkQ_eT0zMUASAR0wcU="  # Add an image URL
+    }
     #{"name": "Product 3", "description": "Description for Product 3", "price": 5.99, "category": "Books"},
     #{"name": "Product 4", "description": "Description for Product 4", "price": 49.99, "category": "Home & Garden"},
     #{"name": "Product 5", "description": "Description for Product 5", "price": 29.99, "category": "Electronics"},

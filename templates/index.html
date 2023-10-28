@@ -38,3 +38,20 @@
     <p><a href="/search">Search Products</a></p>
 </body>
 </html>
+<!-- ... (previous HTML code) ... -->
+<ul>
+    {% for product in products %}
+        <li>
+            <h2>{{ product.name }}</h2>
+            <p>Category: {{ product.category }}</p>
+            <p>Price: ${{ product.price }}</p>
+            <p>{{ product.description }}</p>
+            <img src="{{ product.image_url }}" alt="{{ product.name }} Image">
+            <form method="POST" action="/add_to_cart/{{ product.id }}">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+<!-- ... (remaining HTML code) ... -->
