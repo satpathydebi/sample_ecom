@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,session, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+
 
 # ... your Flask app creation code ...
 
@@ -42,6 +43,27 @@ def index():
 def product(id):
     product = Product.query.get(id)
     return render_template('product.html', product=product)
+# ... (previous code) ...
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        search_query = request.form.get('search_query')
+        products = Product.query.filter(Product.name.ilike(f'%{search_query}%')).all()
+    else:
+        products = []
+
+    return render_template('search.html', products=products)
+
+@app.route('/add_to_cart/<int:product_id>', methods=['POST'])
+def add_to_cart(product_id):
+    # You can implement your cart functionality here.
+    # For now, let's just store the product ID in a session variable.
+    cart = session.get('cart', [])
+    cart.append(product_id)
+    session['cart'] = cart
+    return redirect('/')
+
 
 if __name__ == '__main__':
     with app.app_context():
